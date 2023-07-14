@@ -1,0 +1,25 @@
+nodes:
+  - address: 172.31.32.87                # Change with the Private Ip of rancher server Don't forget
+    internal_address: 172.31.32.87       # Change with the Private Ip of rancher server
+    user: ubuntu
+    role:
+      - controlplane
+      - etcd
+      - worker
+
+# ignore_docker_version: true
+
+services:
+  etcd:
+    snapshot: true
+    creation: 6h
+    retention: 24h
+
+ssh_key_path: ~/.ssh/cumhurkey.pem
+
+# Required for external TLS termination with
+# ingress-nginx v0.22+
+ingress:
+  provider: nginx
+  options:
+    use-forwarded-headers: "true"
