@@ -1,16 +1,22 @@
+//This Terraform Template creates a Rancher server on EC2 Instances
+//The Terraform Template will create the necessary security group, iam policy, iam role (assing the role to rancher_worker and rancher_controlplane nodes), load balancer, target group, listener, aws acm certificate, aws route53 record for Rancher server.
+//Note-1: User must select appropriate variables to form from "variable.tf" file when launching the instance; line 6 "mykey", line 24 "domain-name", line 28 "rancher-subnet", line 32 "hosted zone". The system will work even if other values are not changed but If you are working in a different region, you can change its values and so on.
+//Note-2: Also, the user must change the appropriate variables form in this file when launching the instance; line 42 "vpc_id", line 70 "subnets". If there is no "aws configuration" on the local computer, you must enter the values "secret_key" and "access_key".
+
 terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 4.0"
-    }    
+    }
   }
 }
 
 provider "aws" {
   region = var.region
+  # secret_key = ""
+  # access_key = ""
 }
-
 
 resource "aws_instance" "tf-rancher-server" {
   ami           = var.myami
