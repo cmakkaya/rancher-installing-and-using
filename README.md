@@ -1,2 +1,2 @@
 # rancher-installing-and-using
-created to use in rancher article
+It was created to use in rancher article
